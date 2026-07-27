@@ -41,10 +41,23 @@ The UI tests focus on:
 │   └── endpoints/
 │       └── products.py
 ├── conftest.py
+├── constants/
+│   └── api/
+│       ├── products/
+│       │   ├── constraints.py
+│       │   ├── fields.py
+│       │   ├── messages.py
+│       │   └── test_data.py
+│       ├── settings.py
+│       └── urls.py
 ├── tests/
 │   └── api/
 │       └── products/
-│           └── test_products_basic.py
+│           └── test_get_single_product.py
+├── utils/
+│   └── api/
+│       └── products/
+│           └── test_data.py
 ├── pytest.ini
 ├── requirements.txt
 └── README.md
