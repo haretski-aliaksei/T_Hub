@@ -36,10 +36,9 @@ The UI tests focus on:
 
 ```text
 .
-├── api/
 ├── tests/
 │   ├── api/
-│   └── ui/
+│   │   └── products/
 ├── pytest.ini
 ├── requirements.txt
 └── README.md
@@ -81,3 +80,22 @@ The test suite is organized around clear separation of concerns:
 - assertions validate status codes, response payloads, page states, and user-facing results.
 
 The suite includes positive, negative, and edge case scenarios to provide balanced coverage across API and UI layers.
+
+## Scalability Approach
+
+The current API structure is intentionally minimal and contains only the implemented `products` tests.
+
+As the API coverage grows, new endpoint groups can be added under `tests/api/` without changing the existing test layout:
+
+```text
+tests/
+└── api/
+    ├── products/
+    ├── carts/
+    ├── users/
+    └── ...
+```
+
+This keeps the repository lightweight while still allowing the test suite to scale by resource or business domain.
+
+The framework can be extended by introducing shared API clients, endpoint-specific helpers, fixtures, and reusable assertions when duplication appears across tests. This approach keeps the initial implementation simple and makes additional abstraction driven by real test needs.
