@@ -1,6 +1,8 @@
+import pytest
 import requests
 
 
+@pytest.mark.api
 def test_get_product_by_valid_id_returns_product_details():
     response = requests.get("https://dummyjson.com/products/1", timeout=5)
 
