@@ -36,9 +36,15 @@ The UI tests focus on:
 
 ```text
 .
+├── api/
+│   ├── client.py
+│   └── endpoints/
+│       └── products.py
+├── conftest.py
 ├── tests/
-│   ├── api/
-│   │   └── products/
+│   └── api/
+│       └── products/
+│           └── test_products_basic.py
 ├── pytest.ini
 ├── requirements.txt
 └── README.md
@@ -83,19 +89,30 @@ The suite includes positive, negative, and edge case scenarios to provide balanc
 
 ## Scalability Approach
 
-The current API structure is intentionally minimal and contains only the implemented `products` tests.
+The current API structure is intentionally minimal and contains only the implemented `products` endpoint layer and tests.
 
-As the API coverage grows, new endpoint groups can be added under `tests/api/` without changing the existing test layout:
+API tests are organized using layered responsibility:
 
 ```text
+tests -> endpoint-specific API classes -> common APIClient -> requests
+```
+
+As the API coverage grows, new endpoint groups can be added under `api/endpoints/` and `tests/api/` without changing the existing layout:
+
+```text
+api/
+└── endpoints/
+    ├── products.py
+    ├── carts.py
+    └── users.py
+
 tests/
 └── api/
     ├── products/
     ├── carts/
-    ├── users/
-    └── ...
+    └── users/
 ```
 
 This keeps the repository lightweight while still allowing the test suite to scale by resource or business domain.
 
-The framework can be extended by introducing shared API clients, endpoint-specific helpers, fixtures, and reusable assertions when duplication appears across tests. This approach keeps the initial implementation simple and makes additional abstraction driven by real test needs.
+The common `APIClient` owns reusable HTTP behavior such as base URL handling and request timeout. Endpoint-specific classes, such as `ProductsAPI`, own resource paths and actions. Tests can stay focused on expected behavior instead of request construction details.
