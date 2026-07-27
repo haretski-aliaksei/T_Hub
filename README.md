@@ -37,13 +37,18 @@ The UI tests focus on:
 ```text
 .
 ├── api/
+│   ├── __init__.py
 │   ├── client.py
 │   └── endpoints/
+│       ├── __init__.py
 │       └── products.py
 ├── conftest.py
 ├── constants/
+│   ├── __init__.py
 │   └── api/
+│       ├── __init__.py
 │       ├── products/
+│       │   ├── __init__.py
 │       │   ├── constraints.py
 │       │   ├── fields.py
 │       │   ├── messages.py
@@ -51,12 +56,18 @@ The UI tests focus on:
 │       ├── settings.py
 │       └── urls.py
 ├── tests/
+│   ├── __init__.py
 │   └── api/
+│       ├── __init__.py
 │       └── products/
+│           ├── __init__.py
 │           └── test_get_single_product.py
 ├── utils/
+│   ├── __init__.py
 │   └── api/
+│       ├── __init__.py
 │       └── products/
+│           ├── __init__.py
 │           └── test_data.py
 ├── pytest.ini
 ├── requirements.txt
