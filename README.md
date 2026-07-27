@@ -111,6 +111,19 @@ The test suite is organized around clear separation of concerns:
 
 The suite includes positive, negative, and edge case scenarios to provide balanced coverage across API and UI layers.
 
+## API Coverage Notes
+
+The current API suite focuses on the `Products -> Get a single product` endpoint family from DummyJSON.
+
+Covered API scenarios:
+
+- successful retrieval of an existing product;
+- validation of selected response fields, data types, and constraints;
+- not-found error handling for a dynamically calculated non-existent product ID;
+- delayed response handling using the supported `delay` query parameter.
+
+Mocked responses are not used because the selected scenarios can be covered reliably against the public DummyJSON API.
+
 ## Scalability Approach
 
 The current API structure is intentionally minimal and contains only the implemented `products` endpoint layer and tests.
