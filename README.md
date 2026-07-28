@@ -58,6 +58,7 @@ The UI tests focus on:
 │   └── ui/
 │       ├── __init__.py
 │       ├── cart.py
+│       ├── checkout.py
 │       ├── messages.py
 │       ├── products.py
 │       ├── urls.py
@@ -77,6 +78,7 @@ The UI tests focus on:
 │   ├── __init__.py
 │   ├── base_page.py
 │   ├── cart_page.py
+│   ├── checkout_page.py
 │   ├── login_page.py
 │   └── products_page.py
 ├── tests/
@@ -89,6 +91,7 @@ The UI tests focus on:
 │   └── ui/
 │       ├── __init__.py
 │       ├── test_cart.py
+│       ├── test_checkout.py
 │       └── test_login.py
 ├── utils/
 │   ├── __init__.py

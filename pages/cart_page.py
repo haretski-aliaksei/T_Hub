@@ -2,6 +2,9 @@ from pages.base_page import BasePage
 
 
 class CartPage(BasePage):
+    def start_checkout(self):
+        self.page.locator('[data-test="checkout"]').click()
+
     def get_cart_item_quantity(self):
         return self.page.locator('[data-test="item-quantity"]')
 

@@ -1,3 +1,6 @@
 CART_PATH = "/cart.html"
+CHECKOUT_COMPLETE_PATH = "/checkout-complete.html"
+CHECKOUT_STEP_ONE_PATH = "/checkout-step-one.html"
+CHECKOUT_STEP_TWO_PATH = "/checkout-step-two.html"
 INVENTORY_PATH = "/inventory.html"
 SAUCEDEMO_BASE_URL = "https://www.saucedemo.com"
