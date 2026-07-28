@@ -57,6 +57,7 @@ The UI tests focus on:
 │   │   └── urls.py
 │   └── ui/
 │       ├── __init__.py
+│       ├── messages.py
 │       ├── urls.py
 │       └── users.py
 ├── fixtures/
