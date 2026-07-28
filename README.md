@@ -126,10 +126,28 @@ Run API tests only:
 pytest tests/api
 ```
 
+or:
+
+```bash
+pytest -m api
+```
+
 Run UI tests only:
 
 ```bash
 pytest tests/ui
+```
+
+or:
+
+```bash
+pytest -m ui
+```
+
+Run UI tests in headed browser mode:
+
+```bash
+pytest tests/ui --headed --browser chromium
 ```
 
 ## Test Strategy
@@ -137,7 +155,9 @@ pytest tests/ui
 The test suite is organized around clear separation of concerns:
 
 - test cases describe expected behavior;
-- helper code handles API requests and reusable UI interactions;
+- helper code handles reusable test data preparation;
+- API client classes handle API requests and endpoint-specific paths;
+- Page Object classes handle reusable UI interactions and locators;
 - assertions validate status codes, response payloads, page states, and user-facing results.
 
 The suite includes positive, negative, and edge case scenarios to provide balanced coverage across API and UI layers.
@@ -184,3 +204,49 @@ tests/
 This keeps the repository lightweight while still allowing the test suite to scale by resource or business domain.
 
 The common `APIClient` owns reusable HTTP behavior such as base URL handling and request timeout. Endpoint-specific classes, such as `ProductsAPI`, own resource paths and actions. Tests can stay focused on expected behavior instead of request construction details.
+
+## UI Coverage Notes
+
+The current UI suite focuses on core flows for [Sauce Demo](https://www.saucedemo.com).
+
+Covered UI scenarios:
+
+- successful login for a standard user;
+- locked-out user error validation;
+- adding a product to the cart;
+- cart badge, item name, and item quantity validation;
+- checkout flow from cart to order completion.
+
+The UI tests use Playwright's built-in web-first assertions through `expect`. This allows checks such as URL, visibility, and text validation to wait automatically for the expected browser state.
+
+## UI Scalability Approach
+
+UI tests are organized using the Page Object pattern:
+
+```text
+tests -> page objects -> Playwright page
+```
+
+Page objects own locators and user actions for a specific screen, for example `LoginPage`, `ProductsPage`, `CartPage`, and `CheckoutPage`. Test cases combine these actions into business flows and keep assertions focused on user-visible results.
+
+As UI coverage grows, new pages and flows can be added without changing the existing structure:
+
+```text
+pages/
+├── login_page.py
+├── products_page.py
+├── cart_page.py
+├── checkout_page.py
+└── ...
+
+tests/
+└── ui/
+    ├── test_login.py
+    ├── test_cart.py
+    ├── test_checkout.py
+    └── ...
+```
+
+Reusable UI values such as URLs, users, product names, expected messages, and checkout data are stored under `constants/ui/`. This avoids spreading string literals across tests and keeps future changes localized.
+
+Fixtures are split by test layer under `fixtures/api.py` and `fixtures/ui.py`, while the root `conftest.py` only registers fixture modules. This keeps the setup readable and still allows API fixtures to be reused in UI or end-to-end tests when needed.
