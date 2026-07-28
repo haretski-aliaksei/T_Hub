@@ -63,6 +63,13 @@ The UI tests focus on:
 │   ├── __init__.py
 │   ├── api.py
 │   └── ui.py
+├── models/
+│   ├── __init__.py
+│   └── api/
+│       ├── __init__.py
+│       └── products/
+│           ├── __init__.py
+│           └── product.py
 ├── pages/
 │   ├── __init__.py
 │   ├── base_page.py
