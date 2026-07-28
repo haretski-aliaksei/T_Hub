@@ -1,5 +1,5 @@
-from constants.api.products.test_data import NONEXISTENT_PRODUCT_ID_OFFSET
 from constants.api.products.fields import PRODUCT_ID, PRODUCTS, TOTAL
+from constants.api.products.test_data import NONEXISTENT_PRODUCT_ID_OFFSET
 
 
 def get_valid_product_id(products_api):

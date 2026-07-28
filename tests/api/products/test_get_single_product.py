@@ -11,6 +11,8 @@ from utils.api.products.test_data import (
 
 
 @pytest.mark.api
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_get_product_by_valid_id(products_api):
     product_id = get_valid_product_id(products_api)
 
@@ -24,6 +26,8 @@ def test_get_product_by_valid_id(products_api):
 
 
 @pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.regression
 def test_get_product_by_nonexistent_id(products_api):
     product_id = get_nonexistent_product_id(products_api)
 
@@ -37,6 +41,7 @@ def test_get_product_by_nonexistent_id(products_api):
 
 
 @pytest.mark.api
+@pytest.mark.regression
 def test_get_product_by_valid_id_with_delay(products_api):
     product_id = get_valid_product_id(products_api)
 

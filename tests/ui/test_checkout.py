@@ -16,6 +16,9 @@ from constants.ui.urls import (
 
 
 @pytest.mark.ui
+@pytest.mark.e2e
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_standard_user_can_complete_checkout(
     logged_in_standard_user,
     products_page,

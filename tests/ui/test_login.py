@@ -7,6 +7,8 @@ from constants.ui.users import LOCKED_OUT_USER, SAUCEDEMO_PASSWORD, STANDARD_USE
 
 
 @pytest.mark.ui
+@pytest.mark.smoke
+@pytest.mark.regression
 def test_standard_user_can_log_in(login_page):
     login_page.open()
     login_page.login(STANDARD_USER, SAUCEDEMO_PASSWORD)
@@ -15,6 +17,8 @@ def test_standard_user_can_log_in(login_page):
 
 
 @pytest.mark.ui
+@pytest.mark.negative
+@pytest.mark.regression
 def test_locked_out_user_cannot_log_in(login_page):
     login_page.open()
     login_page.login(LOCKED_OUT_USER, SAUCEDEMO_PASSWORD)
