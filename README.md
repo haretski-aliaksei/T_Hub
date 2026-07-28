@@ -45,16 +45,28 @@ The UI tests focus on:
 ├── conftest.py
 ├── constants/
 │   ├── __init__.py
-│   └── api/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   ├── products/
+│   │   │   ├── __init__.py
+│   │   │   ├── constraints.py
+│   │   │   ├── fields.py
+│   │   │   ├── messages.py
+│   │   │   └── test_data.py
+│   │   ├── settings.py
+│   │   └── urls.py
+│   └── ui/
 │       ├── __init__.py
-│       ├── products/
-│       │   ├── __init__.py
-│       │   ├── constraints.py
-│       │   ├── fields.py
-│       │   ├── messages.py
-│       │   └── test_data.py
-│       ├── settings.py
-│       └── urls.py
+│       ├── urls.py
+│       └── users.py
+├── fixtures/
+│   ├── __init__.py
+│   ├── api.py
+│   └── ui.py
+├── pages/
+│   ├── __init__.py
+│   ├── base_page.py
+│   └── login_page.py
 ├── tests/
 │   ├── __init__.py
 │   └── api/
