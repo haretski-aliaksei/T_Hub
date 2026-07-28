@@ -13,7 +13,7 @@ from constants.ui.urls import CART_PATH
 @pytest.mark.e2e
 @pytest.mark.regression
 def test_standard_user_can_add_product_to_cart(
-    logged_in_standard_user,
+    standard_user_session,
     products_page,
     cart_page,
 ):

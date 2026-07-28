@@ -8,6 +8,7 @@ This repository contains automated API and UI tests for the Senior QA Engineer h
 - pytest
 - requests
 - Playwright
+- Ruff
 
 ## Scope
 
@@ -36,6 +37,9 @@ The UI tests focus on:
 
 ```text
 .
+├── .github/
+│   └── workflows/
+│       └── tests.yml
 ├── api/
 │   ├── __init__.py
 │   ├── client.py
@@ -100,6 +104,7 @@ The UI tests focus on:
 │       └── products/
 │           ├── __init__.py
 │           └── test_data.py
+├── pyproject.toml
 ├── pytest.ini
 ├── requirements.txt
 └── README.md
@@ -150,6 +155,46 @@ Run UI tests in headed browser mode:
 pytest tests/ui --headed --browser chromium
 ```
 
+Run smoke tests only:
+
+```bash
+pytest -m smoke
+```
+
+Run end-to-end UI tests only:
+
+```bash
+pytest -m "ui and e2e"
+```
+
+Run negative tests only:
+
+```bash
+pytest -m negative
+```
+
+## Code Quality
+
+Ruff is used for linting, import ordering, and formatting checks.
+
+Run lint checks:
+
+```bash
+ruff check .
+```
+
+Check formatting:
+
+```bash
+ruff format --check .
+```
+
+Apply formatting:
+
+```bash
+ruff format .
+```
+
 ## Test Strategy
 
 The test suite is organized around clear separation of concerns:
@@ -161,6 +206,17 @@ The test suite is organized around clear separation of concerns:
 - assertions validate status codes, response payloads, page states, and user-facing results.
 
 The suite includes positive, negative, and edge case scenarios to provide balanced coverage across API and UI layers.
+
+## Pytest Markers
+
+Markers are used to run meaningful subsets of the test suite:
+
+- `api` - API tests;
+- `ui` - UI end-to-end tests;
+- `smoke` - high-value checks for critical application availability;
+- `regression` - tests that protect existing behavior;
+- `e2e` - complete user journeys;
+- `negative` - error handling or restricted behavior validation.
 
 ## API Coverage Notes
 
@@ -250,3 +306,19 @@ tests/
 Reusable UI values such as URLs, users, product names, expected messages, and checkout data are stored under `constants/ui/`. This avoids spreading string literals across tests and keeps future changes localized.
 
 Fixtures are split by test layer under `fixtures/api.py` and `fixtures/ui.py`, while the root `conftest.py` only registers fixture modules. This keeps the setup readable and still allows API fixtures to be reused in UI or end-to-end tests when needed.
+
+## CI
+
+GitHub Actions workflow is configured in `.github/workflows/tests.yml`.
+
+It runs on push to `main`, pull requests, and manual dispatch.
+
+The workflow executes:
+
+```bash
+ruff check .
+ruff format --check .
+pytest --browser chromium
+```
+
+This makes linting, formatting, and automated tests part of the repository quality gate.

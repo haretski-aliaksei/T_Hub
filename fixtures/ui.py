@@ -34,6 +34,6 @@ def checkout_page(page, ui_base_url):
 
 
 @pytest.fixture
-def logged_in_standard_user(login_page):
+def standard_user_session(login_page):
     login_page.open()
     login_page.login(STANDARD_USER, SAUCEDEMO_PASSWORD)

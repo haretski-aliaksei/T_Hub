@@ -20,7 +20,7 @@ from constants.ui.urls import (
 @pytest.mark.smoke
 @pytest.mark.regression
 def test_standard_user_can_complete_checkout(
-    logged_in_standard_user,
+    standard_user_session,
     products_page,
     cart_page,
     checkout_page,
