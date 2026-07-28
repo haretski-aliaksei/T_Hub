@@ -69,11 +69,14 @@ The UI tests focus on:
 │   └── login_page.py
 ├── tests/
 │   ├── __init__.py
-│   └── api/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── products/
+│   │       ├── __init__.py
+│   │       └── test_get_single_product.py
+│   └── ui/
 │       ├── __init__.py
-│       └── products/
-│           ├── __init__.py
-│           └── test_get_single_product.py
+│       └── test_login.py
 ├── utils/
 │   ├── __init__.py
 │   └── api/

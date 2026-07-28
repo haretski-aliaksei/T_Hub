@@ -3,5 +3,8 @@ class BasePage:
         self.page = page
         self.base_url = base_url
 
+    def get_url(self, path=""):
+        return f"{self.base_url}{path}"
+
     def open(self, path=""):
-        self.page.goto(f"{self.base_url}{path}")
+        self.page.goto(self.get_url(path))
