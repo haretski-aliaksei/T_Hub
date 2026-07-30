@@ -91,7 +91,8 @@ The UI tests focus on:
 │   │   ├── __init__.py
 │   │   └── products/
 │   │       ├── __init__.py
-│   │       └── test_get_single_product.py
+│   │       ├── test_get_single_product.py
+│   │       └── test_search_products.py
 │   └── ui/
 │       ├── __init__.py
 │       ├── test_cart.py
@@ -99,11 +100,14 @@ The UI tests focus on:
 │       └── test_login.py
 ├── utils/
 │   ├── __init__.py
-│   └── api/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── products/
+│   │       ├── __init__.py
+│   │       └── test_data.py
+│   └── ui/
 │       ├── __init__.py
-│       └── products/
-│           ├── __init__.py
-│           └── test_data.py
+│       └── money.py
 ├── pyproject.toml
 ├── pytest.ini
 ├── requirements.txt
@@ -224,10 +228,12 @@ The current API suite focuses on the `Products -> Get a single product` endpoint
 
 Covered API scenarios:
 
-- successful retrieval of an existing product;
-- validation of selected response fields, data types, and constraints;
+- successful retrieval of an existing product, including data type and constraint
+  validation for `price`, `stock`, `rating`, and `discountPercentage`;
 - not-found error handling for a dynamically calculated non-existent product ID;
-- delayed response handling using the supported `delay` query parameter.
+- invalid input handling for a non-numeric product ID;
+- delayed response handling using the supported `delay` query parameter;
+- empty response handling via `Products -> Search` with a query that matches nothing.
 
 Mocked responses are not used because the selected scenarios can be covered reliably against the public DummyJSON API.
 
@@ -270,8 +276,11 @@ Covered UI scenarios:
 - successful login for a standard user;
 - locked-out user error validation;
 - adding a product to the cart;
+- removing a product from the cart;
 - cart badge, item name, and item quantity validation;
-- checkout flow from cart to order completion.
+- checkout flow from cart to order completion;
+- checkout total calculation (item total + tax = total) on the order overview step;
+- required-field validation when submitting checkout information with missing data.
 
 The UI tests use Playwright's built-in web-first assertions through `expect`. This allows checks such as URL, visibility, and text validation to wait automatically for the expected browser state.
 

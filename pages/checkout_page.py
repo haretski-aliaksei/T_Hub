@@ -15,3 +15,15 @@ class CheckoutPage(BasePage):
 
     def get_complete_header(self):
         return self.page.locator('[data-test="complete-header"]')
+
+    def get_item_total(self):
+        return self.page.locator('[data-test="subtotal-label"]')
+
+    def get_tax(self):
+        return self.page.locator('[data-test="tax-label"]')
+
+    def get_total(self):
+        return self.page.locator('[data-test="total-label"]')
+
+    def get_error_message(self):
+        return self.page.locator('[data-test="error"]')

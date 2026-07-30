@@ -31,3 +31,20 @@ def test_standard_user_can_add_product_to_cart(
         EXPECTED_CART_QUANTITY_FOR_ONE_ITEM
     )
     expect(cart_page.get_cart_item_name()).to_have_text(SAUCE_LABS_BACKPACK)
+
+
+@pytest.mark.ui
+@pytest.mark.e2e
+@pytest.mark.regression
+def test_standard_user_can_remove_product_from_cart(
+    standard_user_session,
+    products_page,
+    cart_page,
+):
+    products_page.add_backpack_to_cart()
+    products_page.open_cart()
+
+    cart_page.remove_backpack()
+
+    expect(cart_page.get_cart_item_name()).to_have_count(0)
+    expect(cart_page.get_cart_badge()).to_have_count(0)

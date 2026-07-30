@@ -7,3 +7,6 @@ class ProductsAPI:
 
     def get_product_by_id(self, product_id, params=None):
         return self.client.get(f"/products/{product_id}", params=params)
+
+    def search_products(self, query):
+        return self.client.get("/products/search", params={"q": query})

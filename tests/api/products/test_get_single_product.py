@@ -2,7 +2,10 @@ import pytest
 
 from constants.api.products.fields import ERROR_MESSAGE
 from constants.api.products.messages import product_not_found_message
-from constants.api.products.test_data import PRODUCT_RESPONSE_DELAY_MS
+from constants.api.products.test_data import (
+    INVALID_PRODUCT_ID,
+    PRODUCT_RESPONSE_DELAY_MS,
+)
 from models.api.products.product import Product
 from utils.api.products.test_data import (
     get_nonexistent_product_id,
@@ -38,6 +41,19 @@ def test_get_product_by_nonexistent_id(products_api):
     error = response.json()
 
     assert error[ERROR_MESSAGE] == product_not_found_message(product_id)
+
+
+@pytest.mark.api
+@pytest.mark.negative
+@pytest.mark.regression
+def test_get_product_by_invalid_id_format(products_api):
+    response = products_api.get_product_by_id(INVALID_PRODUCT_ID)
+
+    assert response.status_code == 404
+
+    error = response.json()
+
+    assert error[ERROR_MESSAGE] == product_not_found_message(INVALID_PRODUCT_ID)
 
 
 @pytest.mark.api
